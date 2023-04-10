@@ -8,7 +8,7 @@ use Livewire\Component;
 class DeleteTypeTransactions extends Component
 {
     public TypeTransaction $type;
-
+    public $canShowModal = false;
     public function render()
     {
         return view('livewire.type-transaction.delete-type-transactions');

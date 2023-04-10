@@ -24,14 +24,11 @@
                     {{$type->name}}
                 </td>
                 <td class="px-6 py-4">
-
                     <x-span-status :status="$type->enabled" />
-
                 </td>
                 <td class="px-6 py-4 flex">
-                    
-                <livewire:type-transaction.delete-type-transactions :type="$type" :key="$type->id .'-delete'" />
-                    
+                    <livewire:type-transaction.delete-type-transactions :type="$type" :key="$type->id .'-delete'" />
+                    <livewire:type-transaction.update-type-transactions :type="$type" :key="$type->id .'-update'" />
                 </td>
             </tr>
         @empty

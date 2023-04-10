@@ -12,6 +12,7 @@ class ListTypeTransactions extends Component
 
         'typeTransaction::created' => '$refresh',
         'typeTransaction::deleted' => '$refresh',
+        'typeTransaction::updated' => '$refresh',
     ];
 
     public function render()
