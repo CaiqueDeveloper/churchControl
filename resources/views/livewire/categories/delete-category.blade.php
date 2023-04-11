@@ -1,5 +1,5 @@
 <div>
-    <x-button-trash wire:click="$toggle('canShowModal','true')"/>
+     <x-button-trash wire:click="$toggle('canShowModal','true')"/>
     
     @if($canShowModal)
         <x-modal>
@@ -14,7 +14,7 @@
                         </svg>
                     </div>
                     <div class="title text-2xl font-bold text-gray-700 text-center">
-                        <h3>Are you sure you want to delete <span class=" text-red-400 w-10 h-10 dark:text-red-200">{{$type->name}}</span> ?</h3>
+                        <h3>Are you sure you want to delete <span class=" text-red-400 w-10 h-10 dark:text-red-200">{{$category->name}}</span> ?</h3>
                     </div>
                     <div class="footer flex justify-between mt-8">
                         <button data-modal-hide="popup-modal" wire:click="delete" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">

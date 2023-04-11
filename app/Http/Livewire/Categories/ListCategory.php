@@ -7,13 +7,20 @@ use Livewire\Component;
 
 class ListCategory extends Component
 {
+    protected $listeners  = [
+
+        'category::created' => '$refresh',
+        'category::deleted' => '$refresh',
+        'category::updated' => '$refresh',
+    ];
+
     public function render()
     {
         
-        return view('livewire.categories.list-category', [
+        return view('livewire.categories.list-category',
             [
-                'categories' => Auth::user()->with('churchs.categories')->get(),
+                'user' => Auth::user()->with('churchs.categories')->get(),
             ]
-        ]);
+        );
     }
 }
