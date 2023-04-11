@@ -9,7 +9,8 @@ use Livewire\Component;
 class CreateCategory extends Component
 {
     public $canShowModal = false;
-   
+    public $name;
+    public $church_id;
 
     protected $rules = [
         'name' => 'required|min:3|max:100',
