@@ -27,7 +27,6 @@
                             <option selected>Select an status</option>
                             <option value="0">Disable</option>
                             <option value="1">Enable</option>
-                           
                         </x-select>
                     </div>
                 </div>

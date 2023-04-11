@@ -6,7 +6,7 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Type
+                    Category
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Status
@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-        @forelse ($user[0]->churchs[0]->categories as $category)
+        @forelse ($user[0]->churchs[0]->categories()->paginate(10) as $category)
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 
                 <td class="px-6 py-4">
@@ -37,6 +37,9 @@
         @endforelse
         </tbody>
     </table>
+    <div class="paginate p-3">
+        {{$user[0]->churchs[0]->categories()->paginate(10)->links()}}
+    </div>
 </div>
 
     
