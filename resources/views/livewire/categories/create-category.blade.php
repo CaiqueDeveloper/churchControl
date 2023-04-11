@@ -8,23 +8,20 @@
             <x-slot name="body">                
                 <form wire:submit.prevent="create">
                     @csrf
+
                     <div class="mb-6">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Category</label>
-                        <input type="text" id="name"
-                            wire:model.defer="name"
-                            name="name"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <x-label for="name" :value="__('Name')" />
+                        <x-input id="name" wire:model.defer="name" class="block mt-1 w-full" type="text" name="name" />
                         @error('name') <span class="error">{{ $message }}</span> @enderror
                     </div>
                     <div class="my-3">
-                        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an chruch</label>
-                        <select id="countries" name="church_id" wire:model.defer="church_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <x-label for="name" :value="__('Select an church')" />
+                        <x-select name="church_id" wire:model.defer="church_id">
                             <option selected>Select an church</option>
                             @foreach($churchs[0]->churchs as $church)
                             <option value="{{$church->id}}">{{$church->name}}</option>
                             @endforeach
-                        </select>
+                        </x-select>
                     </div>
 
                     <x-button class="mt-4">

@@ -1,3 +1,5 @@
 <div>
-    <livewire:categories.create-category />
+    <livewire:categories.create-category />,
+    
+</div>
 </div>
