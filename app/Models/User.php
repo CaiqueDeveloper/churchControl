@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function churchs(){
+
+        return $this->belongsToMany(Church::class, 'user_churchs', 'user_id', 'id');
+    }
 }
