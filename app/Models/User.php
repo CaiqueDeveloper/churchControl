@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public function churchs(){
 
-        return $this->belongsToMany(Church::class, 'user_churchs', 'user_id', 'id');
+        return $this->belongsToMany(Church::class, 'user_churchs');
     }
 }

@@ -27,7 +27,6 @@
                     <x-span-status :status="$category->enabled" />
                 </td>
                 <td class="px-6 py-4 flex">
-
                     <livewire:categories.delete-category :category="$category" :key="$category.'-delete'" />
                     <livewire:categories.update-category :category="$category" :key="$category.'-update'"/>
                 </td>

@@ -31,6 +31,7 @@ class CreateCategory extends Component
         $validatedData = $this->validate();
         Category::create($validatedData);
         $this->name = '';
+        $this->church_id = '';
         $this->emitTo(ListCategory::class,  'category::created');
         $this->canShowModal = false;
     }

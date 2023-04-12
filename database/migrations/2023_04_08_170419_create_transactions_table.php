@@ -20,13 +20,15 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->foreignId('church_id')->constrained('churches');
             $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('typeTransaction_id')->constrained('type_transactions');
             $table->foreignId('created_by')->constrained('users');
+            $table->string('name');
             $table->float('value', 10,2);
-            $table->boolean('is_recurrent');
-            $table->integer('total_recurrent');
+            $table->boolean('is_recurrent')->default(false);
+            $table->string('total_recurrent')->nullable()->default(0);
             $table->date('payment_date');
-            $table->boolean('pay');
-            $table->boolean('enabled');
+            $table->boolean('pay')->default(false);
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
     }
