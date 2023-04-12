@@ -47,7 +47,7 @@ class CreateTransaction extends Component
         $this->created_by  = Auth::user()->id;
         $this->church_id  = Auth::user()->church_id;
         $this->typeTransaction  = TypeTransaction::get();
-        $this->categories  = $user[0]->churchs[0]->categories;
+        $this->categories  = $user[0]->churchs[0]->categories()->where('enabled', true)->get();
     }
     public function render()
     {
