@@ -21,7 +21,8 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('church_id')->constrained('churches');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('typeTransaction_id')->constrained('type_transactions');
-            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('created_by')->constrained('users')->nullable();
+            $table->foreignId('updated_by')->constrained('users')->nullable();
             $table->string('name');
             $table->float('value', 10,2);
             $table->boolean('is_recurrent')->default(false);

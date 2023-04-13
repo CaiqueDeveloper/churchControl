@@ -13,4 +13,8 @@ class Church extends Model
         
         return $this->hasMany(Category::class, 'church_id');
     }
+    public function transactions(){
+
+        return $this->hasMany(Transaction::class, 'church_id');
+    }
 }

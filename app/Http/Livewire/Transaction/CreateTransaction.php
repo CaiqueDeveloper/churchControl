@@ -57,6 +57,7 @@ class CreateTransaction extends Component
     public function create(){
 
         $validate = $this->validate();
+        $this->emitTo(ListTransaction::class, 'transaction::created');
         (new ProcessingTransaction($validate));
         //reset fields form
         $this->name = '';
@@ -71,6 +72,5 @@ class CreateTransaction extends Component
         //closed modal
         $this->canShowModal = false;
         //emit event 
-        $this->emitTo(ListTransaction::class, 'transaction::created');
     }
 }

@@ -46,4 +46,9 @@ class User extends Authenticatable
 
         return $this->belongsToMany(Church::class, 'user_churchs');
     }
+
+    public function church(){
+
+        return $this->hasOne(Church::class, 'id', 'church_id');
+    }
 }
