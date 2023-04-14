@@ -75,12 +75,5 @@ class ProcessingTransaction
         return Transaction::create($data);
     }
 
-    private function validateFields($payload){
-
-        $payload['is_recurrent'] =  $payload['is_recurrent'] != null ? true : false;
-        $payload['pay'] = $payload['pay'] != null ? true : false;
-        $payload['total_recurrent'] = $payload['total_recurrent'] != null ? $payload['total_recurrent'] : 0;
-
-        return $payload;
-    }
+    
 }

@@ -7,6 +7,12 @@
                 <th scope="col" class="px-6 py-3">
                     Transaction
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Type Transaction
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Category
+                </th>
                 <th scope="col" class="px-6 py-3 text-center">
                     Value
                 </th>
@@ -45,6 +51,12 @@
                 
                 <td class="px-6 py-4">
                     {{$transaction['name']}}
+                </td>
+                <td class="px-6 py-4">
+                    {{$transaction['typeTransaction']}}
+                </td>
+                <td class="px-6 py-4">
+                    {{$transaction['category']}}
                 </td>
                 <td class="px-6 py-4 text-center">
                     {{$transaction['value']}}

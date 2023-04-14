@@ -11,7 +11,7 @@ class Church extends Model
 
     public function categories(){
         
-        return $this->hasMany(Category::class, 'church_id');
+        return $this->hasMany(Category::class,'church_id');
     }
     public function transactions(){
 

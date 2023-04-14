@@ -60,7 +60,6 @@
                         <x-input id="value" wire:model.defer="value" class="block mt-1 w-full" type="text" name="value" />
                         @error('value') <span class="error">{{ $message }}</span> @enderror
                     </div>
-                    <x-input wire:model.defer="created_by" class="block mt-1 w-full" value="{{$created_by}}" type="hidden" name="created_by" />
                 </div>
                 <x-button class="mt-4">
                     {{ __('Create') }}

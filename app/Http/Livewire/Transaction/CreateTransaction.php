@@ -3,36 +3,37 @@
 namespace App\Http\Livewire\Transaction;
 
 use App\Classes\ProcessingTransaction;
-use App\Models\Transaction;
+use App\Classes\Transactions;
 use App\Models\TypeTransaction;
-use DateInterval;
-use DatePeriod;
-use DateTime;
+use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CreateTransaction extends Component
 {
-    public $canShowModal = false;
-    public $church_id;
-    public $typeTransaction_id;
-    public $category_id;
-    public $created_by;
-    public $name;
-    public $value;
-    public $is_recurrent;
-    public $total_recurrent;
-    public $payment_date;
-    public $pay;
-    public $typeTransaction;
-    public $categories;
+    public User $user;
+    public object $categories;
+    public object $typeTransaction;
+    public bool $canShowModal = false;
+
+    public ?int $typeTransaction_id = null;
+    public ?int $created_by = null;
+    public ?int $church_id = null;
+    public ?int $category_id = null;
+    public ?string $name = null;
+    public ?float $value = null;
+    public ?bool $is_recurrent = null;
+    public ?int $total_recurrent = null;
+    public ?string $payment_date = null;
+    public ?bool $pay = null;
     
     protected $rules = [
 
-        'church_id' => 'required',
         'category_id' => 'required',
+        'created_by' => 'nullable',
+        'church_id' => 'nullable',
         'typeTransaction_id' => 'required',
-        'created_by' => 'required',
         'name' => 'required|min:3|max:150',
         'value' => 'required',
         'is_recurrent' => 'nullable',
@@ -40,37 +41,25 @@ class CreateTransaction extends Component
         'payment_date' => 'required|date',
         'pay' => 'nullable',
     ];
-    public function mount(){
-
-        $user = Auth::user()->with('churchs.categories')->get();
+    public function __construct()
+    {
+        $this->user = Auth::user();
+        $this->created_by = $this->user->id;
+        $this->church_id = $this->user->church_id;
+        $this->categories = $this->user->church->categories()->where('enabled', true)->get();
+        $this->typeTransaction = TypeTransaction::get();
         
-        $this->created_by  = Auth::user()->id;
-        $this->church_id  = Auth::user()->church_id;
-        $this->typeTransaction  = TypeTransaction::get();
-        $this->categories  = $user[0]->churchs[0]->categories()->where('enabled', true)->get();
     }
-    public function render()
+    public function render(): View
     {
         return view('livewire.transaction.create-transaction');
     }
 
-    public function create(){
-
-        $validate = $this->validate();
+    public function create():void
+    {
+        $valid = $this->validate();
+        (new Transactions(Auth::user()))->processingTransaction($valid);
+        $this->reset();
         $this->emitTo(ListTransaction::class, 'transaction::created');
-        (new ProcessingTransaction($validate));
-        //reset fields form
-        $this->name = '';
-        $this->church_id = '';
-        $this->category_id = '';
-        $this->typeTransaction_id = '';
-        $this->value = '';
-        $this->is_recurrent = '';
-        $this->total_recurrent = '';
-        $this->payment_date = '';
-        $this->pay = '';
-        //closed modal
-        $this->canShowModal = false;
-        //emit event 
     }
 }

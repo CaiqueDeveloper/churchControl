@@ -3,13 +3,14 @@
 namespace App\Http\Livewire\Categories;
 
 use App\Models\Category;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class UpdateCategory extends Component
 {
-    public $canShowModal = false;
     public Category $category;
+    public bool $canShowModal = false;
    
 
     protected $rules = [
@@ -17,7 +18,13 @@ class UpdateCategory extends Component
         'category.church_id' => 'required',
         'category.enabled' => 'boolean',
     ];
-    public function render()
+
+    public function __construct()
+    {
+        $this->category = new Category();
+    }
+
+    public function render(): View
     {
 
         return view(
@@ -28,10 +35,11 @@ class UpdateCategory extends Component
         );
     }
 
-    public function update(){
+    public function update(): void{
+        
         $this->validate();
         $this->category->save();
-        $this->canShowModal = false;
+        $this->reset();
         $this->emitTo(ListCategory::class, 'category::updated');
     }
 }

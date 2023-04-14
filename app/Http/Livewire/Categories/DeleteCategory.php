@@ -3,22 +3,28 @@
 namespace App\Http\Livewire\Categories;
 
 use App\Models\Category;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class DeleteCategory extends Component
 {
-    public $canShowModal = false;
     public Category $category;
+    public bool $canShowModal = false;
 
-    public function render()
+    public function __construct()
+    {
+        $this->category = new Category();
+    }
+    public function render(): View
     {
         return view('livewire.categories.delete-category');
     }
 
-    public function delete(){
+    public function delete(): void
+    {
 
         $this->category->delete();
-        $this->canShowModal = false;
+        $this->reset();
         $this->emitTo(ListCategory::class, 'category::deleted');
     }
 }
