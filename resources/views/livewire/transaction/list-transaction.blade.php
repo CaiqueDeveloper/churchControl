@@ -35,12 +35,6 @@
                     Created By
                 </th>
                 <th scope="col" class="px-6 py-3 text-center">
-                    Created At
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
-                    Updated At
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
                     Actions
                 </th>
             </tr>
@@ -50,45 +44,40 @@
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 
                 <td class="px-6 py-4">
-                    {{$transaction['name']}}
+                    {{$transaction->name}}
                 </td>
                 <td class="px-6 py-4">
-                    {{$transaction['typeTransaction']}}
+                    {{$transaction->typeTransaction->name}}
                 </td>
                 <td class="px-6 py-4">
-                    {{$transaction['category']}}
+                    {{$transaction->category->name}}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    {{$transaction['value']}}
+                    {{$transaction->value}}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    {{$transaction['is_recurrent']}}
+                    {{$transaction->is_recurrent}}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    {{$transaction['total_recurrent']}}
+                    ({{$transaction->total_recurrent}})
                 </td>
                 <td class="px-6 py-4 text-center">
-                    {{$transaction['payment_date']}}
+                    {{$transaction->payment_date}}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    {{$transaction['pay']}}
+                    {{$transaction->pay}}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    <x-span-status :status="$transaction['state']" />
+                    <x-span-status :status="$transaction->enabled" />
                 </td>
                 <td class="px-6 py-4 text-center">
-                    {{$transaction['created_by']}}
-                </td>
-                <td class="px-6 py-4 text-center">
-                    {{$transaction['created_at']}}
-                </td>
-                <td class="px-6 py-4 text-center">
-                    {{$transaction['updated_at']}}
+                    {{$transaction->createdBy->name}}
                 </td>
                 
                 <td class="px-6 py-4 text-center flex">
-                    <livewire:transaction.delete-transaction />
-                    <livewire:transaction.update-transaction />
+                    
+                    <livewire:transaction.delete-transaction :transaction="$transaction" :key="$transaction.'-delete'"/>
+                    <livewire:transaction.update-transaction :transaction="$transaction" :key="$transaction.'-update'" />
                 </td>
             </tr>
         @empty
@@ -96,7 +85,7 @@
         @endforelse
         </tbody>
     </table>
-    {{-- <div class="paginate p-3">
-        {{$user[0]->churchs[0]->categories()->paginate(10)->links()}}
-    </div> --}}
+    <div class="paginate p-3">
+        {{$transactions->links()}}
+    </div>
 </div>

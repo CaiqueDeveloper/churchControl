@@ -1,3 +1,81 @@
 <div>
-     <x-button-update />
+     <x-button-update wire:click="$toggle('canShowModal','true')" />
+     @if($canShowModal)
+     <x-modal>
+          <x-slot name="title">Update Category ({{$transaction->name}})</x-slot>
+          <x-slot name="body">
+               <form wire:submit.prevent="update">
+                    @csrf
+                    <div class="flex items-center mb-4">
+                         <input wire:model.defer="transaction.pay" id="pay" type="checkbox" value=""
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                         <label for="pay" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">It's paid?
+                         </label>
+                    </div>
+                    <div class="mb-6 text-left">
+                         <x-label for="name" :value="__('Description Transaction')" />
+                         <x-input id="name" wire:model.defer="transaction.name" class="block mt-1 w-full" type="text"
+                              name="name" />
+                         @error('name') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-6 text-left">
+                         <x-label for="payment_date" :value="__('Payment Date')" />
+                         <x-input id="payment_date" wire:model.defer="transaction.payment_date"
+                              class="block mt-1 w-full" type="date" name="payment_date" />
+                         @error('payment_date') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="grid md:grid-cols-2 md:gap-6 my-3 text-left">
+                         <div>
+                              <x-label :value="__('Select an type Transaction')" />
+                              <x-select name="typeTransaction_id" wire:model.defer="transaction.typeTransaction_id">
+                                   <option selected>Select an type Transaction</option>
+                                   @foreach($typeTransaction as $type)
+                                   <option value="{{$type->id}}">{{$type->name}}</option>
+                                   @endforeach
+                              </x-select>
+                              @error('typeTransaction_id') <span class="error">{{ $message }}</span> @enderror
+                         </div>
+                         <div class="text-left">
+                              <x-label for="name" :value="__('Select an category')" />
+                              <x-select name="category_id" wire:model.defer="transaction.category_id">
+                                   <option selected>Select an category</option>
+                                   @foreach($categories as $category)
+                                   <option value="{{$category->id}}">{{$category->name}}</option>
+                                   @endforeach
+                              </x-select>
+                              @error('category_id') <span class="error">{{ $message }}</span> @enderror
+                         </div>
+                    </div>
+                    <div class="flex items-center mb-4">
+                         <input wire:model.defer="transaction.is_recurrent" id="checkbox-1" type="checkbox"
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                         <label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is
+                              Recurrent? </label>
+                    </div>
+                    <div class="grid md:grid-cols-2 md:gap-6 my-3 text-left">
+                         <div>
+                              <x-label for="name" :value="__('Select an status')" />
+                              <x-select name="enabled" wire:model.defer="transaction.enabled">
+                                  <option selected>Select an status</option>
+                                  <option value="0">Disable</option>
+                                  <option value="1">Enable</option>
+                              </x-select>
+                         </div>
+                         <div class="text-left">
+                              <x-label for="value" :value="__('Value')" />
+                              <x-input id="value" wire:model.defer="transaction.value" class="block mt-1 w-full"
+                                   type="text" name="value" />
+                              @error('value') <span class="error">{{ $message }}</span> @enderror
+                         </div>
+                    </div>
+                    <div class="w-full flex justify-start">
+                         <x-button class="mt-4">
+                              {{ __('Update') }}
+                         </x-button>
+                    </div>
+               </form>
+          </x-slot>
+     </x-modal>
+     @endif
+</div>
 </div>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Transaction;
 
-use App\Classes\ProcessingTransaction;
 use App\Classes\Transactions;
 use App\Models\TypeTransaction;
 use App\Models\User;
@@ -48,7 +47,7 @@ class CreateTransaction extends Component
         $this->church_id = $this->user->church_id;
         $this->categories = $this->user->church->categories()->where('enabled', true)->get();
         $this->typeTransaction = TypeTransaction::get();
-        
+
     }
     public function render(): View
     {
@@ -60,6 +59,6 @@ class CreateTransaction extends Component
         $valid = $this->validate();
         (new Transactions(Auth::user()))->processingTransaction($valid);
         $this->reset();
-        $this->emitTo(ListTransaction::class, 'transaction::created');
+        $this->emitTo(ListTransaction::class, 'transaction:::index:created');
     }
 }

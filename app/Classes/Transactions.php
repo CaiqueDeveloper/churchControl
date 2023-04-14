@@ -27,12 +27,9 @@ class Transactions
         $start = '2023-043-01';
         $end = '2023-06-30';
 
-        $payload = Transaction::with('category', 'typeTransaction', 'createdBy', 'updatedBy')
-            ->where('church_id', $this->user->church_id)
-            ->whereBetween('payment_date', [$start, $end])
-            ->get();
+       return $this->user->church->transactions()->paginate(10);
 
-        return $this->mountedData($payload);
+       // return $this->mountedData($payload);
     }
     private function mountedData($payload)
     {
