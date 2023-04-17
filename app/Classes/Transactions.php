@@ -27,7 +27,9 @@ class Transactions
         $start = '2023-043-01';
         $end = '2023-06-30';
 
-       return $this->user->church->transactions()->paginate(10);
+       return $this->user->church->transactions()
+       ->orderBy('created_at', 'DESC')
+       ->paginate(10);
 
        // return $this->mountedData($payload);
     }
